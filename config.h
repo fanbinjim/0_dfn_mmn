@@ -20,11 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID    0xFEED
-#define PRODUCT_ID   0x0000
+#define VENDOR_ID    0x5243
+#define PRODUCT_ID   0xA001
 #define DEVICE_VER   0x0001
 #define MANUFACTURER fanbinjim
-#define PRODUCT      0_dfn_mmn
+#define PRODUCT      DFN_MMN_Keyboard
 
 /* key matrix size */
 #define MATRIX_ROWS 6
@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
  */
-#define MATRIX_ROW_PINS { B4, F7, F6, F5, F4, F1 }
+#define MATRIX_ROW_PINS { C7, F7, F6, F5, F4, F1 }
 #define MATRIX_COL_PINS { F0, B6, B5, B4 }
 #define UNUSED_PINS
 
@@ -71,7 +71,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGBLIGHT_HUE_STEP 8
 #    define RGBLIGHT_SAT_STEP 8
 #    define RGBLIGHT_VAL_STEP 8
-#    define RGBLIGHT_LIMIT_VAL 255 /* The maximum brightness level */
+#    define RGBLIGHT_LIMIT_VAL 120 /* The maximum brightness level */
 #    define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
 /*== all animations enable ==*/
 #    define RGBLIGHT_ANIMATIONS
@@ -87,10 +87,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#    define RGBLIGHT_EFFECT_ALTERNATING
 /*== customize breathing effect ==*/
 /*==== (DEFAULT) use fixed table instead of exp() and sin() ====*/
-#    define RGBLIGHT_BREATHE_TABLE_SIZE 256      // 256(default) or 128 or 64
+// #    define RGBLIGHT_BREATHE_TABLE_SIZE 256      // 256(default) or 128 or 64
 /*==== use exp() and sin() ====*/
-#    define RGBLIGHT_EFFECT_BREATHE_CENTER 1.85  // 1 to 2.7
-#    define RGBLIGHT_EFFECT_BREATHE_MAX    255   // 0 to 255
+// #    define RGBLIGHT_EFFECT_BREATHE_CENTER 1.85  // 1 to 2.7
+// #    define RGBLIGHT_EFFECT_BREATHE_MAX    255   // 0 to 255
 #endif
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
@@ -109,9 +109,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 //#define GRAVE_ESC_CTRL_OVERRIDE
 
-#define OLED_DISPLAY_128X32
-#define OLED_FONT_END 255
-#define OLED_FONT_H "gfxfont.c"
+#ifdef OLED_ENABLE
+    #define OLED_DISPLAY_128X32
+    #define OLED_TIMEOUT 400000
+#endif
 
 #define ENCODERS_PAD_A { D2 }
 #define ENCODERS_PAD_B { D3 }
@@ -156,8 +157,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_ONESHOT
 
 /* disable these deprecated features by default */
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
+// #define NO_ACTION_MACRO
+// #define NO_ACTION_FUNCTION
 
 /* Bootmagic Lite key configuration */
 //#define BOOTMAGIC_LITE_ROW 0
