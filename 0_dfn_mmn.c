@@ -20,12 +20,12 @@
 
 led_config_t g_led_config = { {
   // Key Matrix to LED Index
-    {   NO_LED, NO_LED, NO_LED,  NO_LED },
-    {0,  1,  2,  3},
-    {7,  6,  5,  4},
-    {8,  9,  10, 11},
-    {15, 14, 13, 12},
-    {16, 17, 18, 19},
+    {NO_LED, NO_LED, NO_LED,  NO_LED , NO_LED},
+    {0,  1,  2,  3, NO_LED},
+    {7,  6,  5,  4, NO_LED},
+    {8,  9,  10, 11, NO_LED},
+    {15, 14, 13, 12, NO_LED},
+    {16, 17, 18, 19, NO_LED},
 }, {
   // LED Index to Physical Position
   { 0,  0}, {20,  0}, {40,  0}, {60,  0},

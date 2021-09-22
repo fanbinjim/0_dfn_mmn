@@ -32,32 +32,32 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
     [_BASE] = LAYOUT(
-        _______,      TO(1),                      KC_AUDIO_MUTE,
-        KC_NUMLOCK,   KC_BSPACE,    KC_DELETE,    KC_KP_SLASH,
+        _______,      TO(1),                      KC_AUDIO_MUTE, KC_AUDIO_VOL_UP,
+        KC_NUMLOCK,   KC_BSPACE,    KC_DELETE,    KC_KP_SLASH, KC_AUDIO_VOL_DOWN,
         KC_KP_7,      KC_KP_8,      KC_KP_9,      KC_KP_ASTERISK,
         KC_KP_4,      KC_KP_5,      KC_KP_6,      KC_KP_MINUS,
         KC_KP_1,      KC_KP_2,      KC_KP_3,      KC_KP_PLUS,
         KC_KP_ENTER,  KC_KP_0,      KC_KP_DOT,    KC_KP_ENTER
     ),
     [_1] = LAYOUT(
-         TO(0) ,     TO(2) ,                _______,
-        _______,    _______,    _______,    _______,
+         TO(0) ,     TO(2) ,                _______,    _______,
+        _______,    _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______
     ),
     [_2] = LAYOUT(
-         TO(1) ,     TO(3) ,                _______,
-        _______,    _______,    _______,    _______,
+         TO(1) ,     TO(3) ,                _______,    _______,
+        _______,    _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______,
         _______,    _______,    _______,    _______
     ),
     [_3] = LAYOUT(
-         TO(2) ,     TO(3) ,                _______,
-        _______,    _______,    _______,    RGB_MODE_FORWARD,
+         TO(2) ,     TO(3) ,                _______,    _______,
+        _______,    _______,    _______,    RGB_MODE_FORWARD,    _______,
         RGB_MODE_XMAS,    RGB_MODE_GRADIENT,    _______,    RGB_MODE_REVERSE,
         RGB_MODE_SWIRL,    RGB_MODE_SNAKE,    RGB_MODE_KNIGHT,    RGB_SPI,
         RGB_MODE_PLAIN,    RGB_MODE_BREATHE,    RGB_MODE_RAINBOW,    RGB_SPD,
@@ -218,20 +218,24 @@ void oled_task_user(void) {
 
 #ifdef ENCODER_ENABLE
 
-uint8_t codeC[2][4] = {
-    {KC_VOLU, KC_1, KC_3, KC_5},
-    {KC_VOLD, KC_2, KC_4, KC_6}
-};
+// uint8_t codeC[2][4] = {
+//     {KC_VOLU, KC_1, KC_3, KC_5},
+//     {KC_VOLD, KC_2, KC_4, KC_6}
+// };
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     oled_timer = timer_read32();
     uint8_t layer = get_highest_layer(layer_state);
+    uint16_t en_p_keycode = keymap_key_to_keycode(layer, (keypos_t){.row = 0, .col = 4});
+    uint16_t en_m_keycode = keymap_key_to_keycode(layer, (keypos_t){.row = 1, .col = 4});
 
     if (index == 0) { /* First encoder */
         if (clockwise) {
-            tap_code(codeC[0][layer]);
+            // tap_code(codeC[0][layer]);
+            tap_code(en_p_keycode);
         } else {
-            tap_code(codeC[1][layer]);
+            // tap_code(codeC[1][layer]);
+            tap_code(en_m_keycode);
         }
     }
     return true;
